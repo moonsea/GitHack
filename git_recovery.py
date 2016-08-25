@@ -18,9 +18,8 @@ if len(sys.argv) == 1:
 
 A `.git` folder disclosure exploit. By LiJieJie
 
-Usage: GitHack.py http://www.target.com/.git/
+Usage: git_recovery.py http://www.target.com/.git/
 
-bug-report: my[at]lijiejie.com (http://www.lijiejie.com)
 """
     print msg
     sys.exit(0)
