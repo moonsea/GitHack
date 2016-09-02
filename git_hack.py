@@ -19,17 +19,22 @@ Usage: python git_hack.py https://github.com/user/repo
     print msg
     sys.exit(0)
 
+
 def init():
     conf.repo_url = sys.argv[-1]
     # conf.domain = urlparse.urlparse(sys.argv[-1]).netloc.replace(':', '_')
     repo_path = urlparse.urlparse(sys.argv[-1]).path.split('/')
     conf.user = repo_path[1]
     conf.repo = repo_path[2]
-    conf.output_path = os.path.join('output',conf.user)
+    conf.output_path = os.path.join('output', conf.user)
 
-    """ Create Output Directory"""
+    """
+    Create Output Directory
+    /output/user
+    """
     if not os.path.exists(conf.output_path):
         os.makedirs(conf.output_path)
+
 
 def repo():
     repos = Repos()
@@ -44,6 +49,7 @@ def repo():
     " language
     " stargazers_count
     " watchers_count
+    " clone_url
     """
     kb.base_info = repos.base_info()
 
@@ -58,6 +64,7 @@ def repo():
     " type
     """
     kb.repo_leak_con = repos.repo_leak_con()
+
 
 def main():
     init()
