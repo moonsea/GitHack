@@ -31,6 +31,7 @@ class Repos(object):
     def base_info(self):
         super(Repos, self).__init__()
         base_url = '/'.join([self.base_url, conf.user, conf.repo])
+        print base_url
         response = self.repo_request(base_url)
         return response
 

@@ -31,7 +31,8 @@ conf.ignore_type = ignore_img + ignore_exec + ignore_style
 # sensitive ip address
 # conf.sense_ip = r'\d+\.\d+\.\d+\.\d+'
 # conf.sense_ip = r'\d{1,2}|1\d\d|2[0-4]\d|25[0-5]((\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}|(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){5})'
-conf.sense_ip = r'((25[0-5]|2[0-4]\d|[01]?\d\d?)($|(?!\.$)\.)){4}'
+# conf.sense_ip = r'((25[0-5]|2[0-4]\d|[01]?\d\d?)($|(?!\.$)\.)){4}'
+conf.sense_ip = r'(\d{1,3}\.){3}(\d{1,3})'
 
 # sense_conf = ['conf', 'properity', 'setting', 'admin', 'manage', 'root']
 # conf.sense_string = sense_conf

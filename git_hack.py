@@ -26,6 +26,7 @@ def init():
     repo_path = urlparse.urlparse(sys.argv[-1]).path.split('/')
     conf.user = repo_path[1]
     conf.repo = repo_path[2]
+    conf.repo = conf.repo if conf.repo[-4:] != '.git' else conf.repo[:-4]
     conf.output_path = os.path.join('output', conf.user)
 
     """
