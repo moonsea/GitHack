@@ -20,6 +20,7 @@ conf = AttribDict()
 kb = AttribDict()
 
 # ignore Directory
+# conf.ignore_dir = ['.git', 'node_modules']
 conf.ignore_dir = ['.git']
 
 # ignore file type
@@ -29,14 +30,21 @@ ignore_style = ['css']
 conf.ignore_type = ignore_img + ignore_exec + ignore_style
 
 # sensitive ip address
-# conf.sense_ip = r'\d+\.\d+\.\d+\.\d+'
-# conf.sense_ip = r'\d{1,2}|1\d\d|2[0-4]\d|25[0-5]((\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}|(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){5})'
-# conf.sense_ip = r'((25[0-5]|2[0-4]\d|[01]?\d\d?)($|(?!\.$)\.)){4}'
-conf.sense_ip = r'(\d{1,3}\.){3}(\d{1,3})'
+conf.sense_ip = r'((([1-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.)((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){2}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]))'
+
+# ignore ip prefix
+conf.ignore_ip_prefix = ['.', '-']
+
+# ignore ip suffix
+conf.ignore_ip_suffix = ['.', '-']
+
+# ignore ip
+conf.ignore_ip = ['127.0.0.1', '8.8.8.8', '0.0.0.0', '255.255.255.0', '192.168.1.1', '192.168.0.1']
 
 # sense_conf = ['conf', 'properity', 'setting', 'admin', 'manage', 'root']
 # conf.sense_string = sense_conf
 
+conf.count = 0
 
 # object with each database management system specific queries
 # queries = {}

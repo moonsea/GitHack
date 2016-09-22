@@ -5,7 +5,7 @@ import re
 import os
 import json
 import base64
-import urllib
+# import urllib
 import urllib2
 # import shutil
 from git import Repo
@@ -31,7 +31,6 @@ class Repos(object):
     def base_info(self):
         super(Repos, self).__init__()
         base_url = '/'.join([self.base_url, conf.user, conf.repo])
-        print base_url
         response = self.repo_request(base_url)
         return response
 
@@ -47,7 +46,7 @@ class Repos(object):
         if(os.path.isdir(clone_path)):
             str = raw_input(
                 "[!] Repo already exists, still reload? Y/n(default n):")
-            if (str != 'Y'):
+            if (str != 'Y' and str != 'y'):
                 return clone_path
             else:
                 # shutil.rmtree(clone_path)
@@ -150,12 +149,43 @@ class Repos(object):
 
         for line in file_con:
             # IP #
-            match = re.search(conf.sense_ip, line)
+            match_ip = self.detect_ip(line)
 
-            if(match):
-                print file_path
-                print line
-                print match.group(0)
+            if(match_ip):
+                conf.count += 1
+                print '[num]:', conf.count
+                print ''
+                # print '[path]:', file_path
+
+    ##
+    # Detect IP
+    ##
+    def detect_ip(self, line):
+        match = re.search(conf.sense_ip, line)
+
+        if(match):
+            match_con = match.group()
+
+            if(match_con in conf.ignore_ip):
+                return False
+
+            begin_index = line.index(match_con)
+            if(begin_index > 0):
+                str = line[begin_index - 1]
+                if(str.isdigit() or str in conf.ignore_ip_prefix):
+                    return False
+
+            end_index = begin_index + len(match_con)
+            if(end_index <= len(line)):
+                str = line[end_index]
+                if(str.isdigit() or str in conf.ignore_ip_suffix):
+                    return False
+
+            print '[line]:', line.strip()
+            print '[group]:', match_con
+
+            return True
+        return False
 
     """
     " Return repo content with leaked information
